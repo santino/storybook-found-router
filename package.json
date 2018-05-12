@@ -1,0 +1,85 @@
+{
+  "name": "storybook-found-router",
+  "version": "0.1.0",
+  "description": "Storybook decorator for React components using Found routing",
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "rimraf lib && babel src -d lib --ignore test.js",
+    "coverage": "npm run testonly -- --coverage",
+    "format": "standard --fix",
+    "lint": "standard",
+    "precommit": "lint-staged && npm run testonly",
+    "prepublish": "npm run build",
+    "test": "npm run lint && npm run coverage",
+    "testonly": "jest --runInBand --verbose",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/santino/storybook-found-router.git"
+  },
+  "keywords": [
+    "storybook",
+    "react",
+    "router",
+    "found",
+    "farce"
+  ],
+  "author": "Santino Puleio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/santino/storybook-found-router/issues"
+  },
+  "homepage": "https://github.com/santino/storybook-found-router",
+  "standard": {
+    "ignore": [
+      "/lib/"
+    ],
+    "env": [
+      "jest"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**"
+    ],
+    "setupFiles": [
+      "<rootDir>/setupTests.js"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "standard --fix",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "@storybook/addon-actions": "^3.4.3",
+    "@storybook/addon-links": "^3.4.3",
+    "@storybook/addons": "^3.4.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "found": "^0.3.11",
+    "jest": "^22.4.3",
+    "lint-staged": "^7.1.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "rimraf": "^2.6.2",
+    "standard": "^11.0.1"
+  },
+  "peerDependencies": {
+    "farce": "^0.2.0",
+    "found": "^0.3.0",
+    "prop-types": "^15.5.0",
+    "react": "*"
+  }
+}
