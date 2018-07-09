@@ -1,6 +1,6 @@
 {
   "name": "storybook-found-router",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Storybook decorator for React components using Found routing",
   "files": [
     "lib"
