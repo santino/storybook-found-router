@@ -57,19 +57,20 @@
     ]
   },
   "dependencies": {
-    "@storybook/addon-actions": "^3.4.3",
-    "@storybook/addon-links": "^3.4.3",
-    "@storybook/addons": "^3.4.3"
+    "@storybook/addon-actions": "^3.4.8",
+    "@storybook/addon-links": "^3.4.8"
   },
   "devDependencies": {
+    "@storybook/react": "^3.4.8",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "farce": "^0.2.6",
     "found": "^0.3.11",
-    "jest": "^22.4.3",
+    "jest": "^23.3.0",
     "lint-staged": "^7.1.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
