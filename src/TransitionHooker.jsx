@@ -44,7 +44,14 @@ class TransitionHooker extends React.Component {
     if (!match) return this.handleMatchingFailure()
 
     const routes = matcher.getRoutes({ routeIndices: match.routeIndices })
-    const route = routes.pop()
+
+    // Due to a breaking change introduced in found 4.0 we need to traverse empty objects.
+    // As discussed in https://github.com/4Catalyzer/found/issues/657
+    let route = routes.pop()
+    while (!Object.keys(route).length && routes.length) {
+      route = routes.pop()
+    }
+
     const isRouteStoryArray = Array.isArray(route.story)
     const kind = isRouteStoryArray ? route.story[0] : route.story
     const story = isRouteStoryArray ? route.story[1] : 'default'

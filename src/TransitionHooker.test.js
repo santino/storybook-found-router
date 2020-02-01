@@ -165,6 +165,48 @@ describe('TransitionHooker', () => {
       expect(wrapper.instance().handleMatchingFailure).toHaveBeenCalledWith()
       expect(wrapper.instance().handleMatchingSuccess).not.toHaveBeenCalled()
     })
+
+    it('traverses single empty object when present in routes array', () => {
+      const wrapper = wrap()
+      routerProp.router.matcher.match.mockReturnValueOnce({ routeIndices: [0] })
+      routerProp.router.matcher.getRoutes.mockReturnValueOnce([
+        { story: 'foo' },
+        {}
+      ])
+      wrapper.instance().handleMatchingFailure = jest.fn()
+      wrapper.instance().handleMatchingSuccess = jest.fn()
+      wrapper.instance().onTransition({ action: 'PUSH', pathname: '/' })
+
+      expect(action).toHaveBeenCalledWith('PUSH')
+      expect(mockActionAddon).toHaveBeenCalledWith('/')
+      expect(wrapper.instance().handleMatchingFailure).not.toHaveBeenCalled()
+      expect(wrapper.instance().handleMatchingSuccess).toHaveBeenCalledWith(
+        'foo',
+        'default'
+      )
+    })
+
+    it('traverses multiple empty objects when present in routes array', () => {
+      const wrapper = wrap()
+      routerProp.router.matcher.match.mockReturnValueOnce({ routeIndices: [0] })
+      routerProp.router.matcher.getRoutes.mockReturnValueOnce([
+        { story: 'foo' },
+        {},
+        {},
+        {}
+      ])
+      wrapper.instance().handleMatchingFailure = jest.fn()
+      wrapper.instance().handleMatchingSuccess = jest.fn()
+      wrapper.instance().onTransition({ action: 'PUSH', pathname: '/' })
+
+      expect(action).toHaveBeenCalledWith('PUSH')
+      expect(mockActionAddon).toHaveBeenCalledWith('/')
+      expect(wrapper.instance().handleMatchingFailure).not.toHaveBeenCalled()
+      expect(wrapper.instance().handleMatchingSuccess).toHaveBeenCalledWith(
+        'foo',
+        'default'
+      )
+    })
   })
 
   describe('handleMatchingFailure method', () => {
