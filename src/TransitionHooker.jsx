@@ -2,20 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { action } from '@storybook/addon-actions'
 import { linkTo } from '@storybook/addon-links'
-import { routerShape } from 'found/lib/PropTypes'
+import { routerShape } from 'found/PropTypes'
 
 class TransitionHooker extends React.Component {
   constructor (props) {
     super(props)
 
     this.onTransition = this.onTransition.bind(this)
-    this.removeTransitionHook = props.router.addTransitionHook(
+    this.removeNavigationListener = props.router.addNavigationListener(
       this.onTransition
     )
   }
 
   componentWillUnmount () {
-    this.removeTransitionHook()
+    this.removeNavigationListener()
   }
 
   handleMatchingFailure () {
