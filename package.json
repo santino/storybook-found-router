@@ -1,6 +1,6 @@
 {
   "name": "storybook-found-router",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Storybook decorator for React components using Found routing",
   "files": [
     "lib"
@@ -63,16 +63,16 @@
   "devDependencies": {
     "@storybook/react": "^5.3.18",
     "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "farce": "^0.4.1",
     "found": "^0.5.3",
-    "jest": "^25.2.7",
-    "lint-staged": "^10.1.2",
-    "react": "^16.12.0",
+    "jest": "^25.5.2",
+    "lint-staged": "^10.2.0",
+    "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "rimraf": "^3.0.2",
     "standard": "^14.3.3"
@@ -80,7 +80,7 @@
   "peerDependencies": {
     "farce": "^0.4.0",
     "found": "^0.5.0",
-    "prop-types": "^15.7.2",
+    "prop-types": "^15.7.0",
     "react": "*"
   }
 }
