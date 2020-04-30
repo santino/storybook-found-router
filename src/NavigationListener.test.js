@@ -2,7 +2,7 @@ import React from 'react'
 import { mount, shallow } from 'enzyme'
 import { action } from '@storybook/addon-actions'
 import { linkTo } from '@storybook/addon-links'
-import TransitionHooker from './TransitionHooker'
+import NavigationListener from './NavigationListener'
 
 const mockActionAddon = jest.fn()
 const mockLinkAddon = jest.fn()
@@ -20,7 +20,7 @@ global.console = {
 
 const storyFn = () => <div>my story</div>
 
-describe('TransitionHooker', () => {
+describe('NavigationListener', () => {
   const routerProp = {
     router: {
       push: jest.fn(),
@@ -39,7 +39,7 @@ describe('TransitionHooker', () => {
     }
   }
   const wrap = () =>
-    mount(<TransitionHooker {...routerProp} story={storyFn} />)
+    mount(<NavigationListener {...routerProp} story={storyFn} />)
 
   describe('React Component', () => {
     afterEach(() => {
@@ -49,17 +49,17 @@ describe('TransitionHooker', () => {
     it('renders the passed story element as a children', () => {
       const wrapper = wrap()
 
-      expect(wrapper.find('TransitionHooker')).toHaveLength(1)
+      expect(wrapper.find('NavigationListener')).toHaveLength(1)
       expect(wrapper.children().html()).toEqual(shallow(storyFn()).html())
     })
 
-    it('adds the internal onTransition method as a TransitionHook', () => {
+    it('adds the internal onNavigation method as a NavigationListener', () => {
       const wrapper = wrap()
       wrapper.instance().removeNavigationListener = jest.fn()
 
       expect(routerProp.router.addNavigationListener).toHaveBeenCalledTimes(1)
       expect(routerProp.router.addNavigationListener).toHaveBeenCalledWith(
-        wrapper.instance().onTransition
+        wrapper.instance().onNavigation
       )
     })
 
@@ -75,7 +75,7 @@ describe('TransitionHooker', () => {
     })
   })
 
-  describe('onTransition method', () => {
+  describe('onNavigation method', () => {
     afterEach(() => {
       mockActionAddon.mockClear()
       action.mockClear()
@@ -93,7 +93,7 @@ describe('TransitionHooker', () => {
       ])
       wrapper.instance().handleMatchingFailure = jest.fn()
       wrapper.instance().handleMatchingSuccess = jest.fn()
-      wrapper.instance().onTransition({ action: 'PUSH', pathname: '/' })
+      wrapper.instance().onNavigation({ action: 'PUSH', pathname: '/' })
 
       expect(action).toHaveBeenCalledWith('PUSH')
       expect(mockActionAddon).toHaveBeenCalledWith('/')
@@ -114,7 +114,7 @@ describe('TransitionHooker', () => {
       ])
       wrapper.instance().handleMatchingFailure = jest.fn()
       wrapper.instance().handleMatchingSuccess = jest.fn()
-      wrapper.instance().onTransition({ action: 'PUSH', pathname: '/login' })
+      wrapper.instance().onNavigation({ action: 'PUSH', pathname: '/login' })
 
       expect(action).toHaveBeenCalledWith('PUSH')
       expect(mockActionAddon).toHaveBeenCalledWith('/login')
@@ -135,7 +135,7 @@ describe('TransitionHooker', () => {
       ])
       wrapper.instance().handleMatchingFailure = jest.fn()
       wrapper.instance().handleMatchingSuccess = jest.fn()
-      wrapper.instance().onTransition({ action: 'PUSH', pathname: '/login' })
+      wrapper.instance().onNavigation({ action: 'PUSH', pathname: '/login' })
 
       expect(action).toHaveBeenCalledWith('PUSH')
       expect(mockActionAddon).toHaveBeenCalledWith('/login')
@@ -154,7 +154,7 @@ describe('TransitionHooker', () => {
       routerProp.router.matcher.getRoutes.mockReturnValueOnce([{}])
       wrapper.instance().handleMatchingFailure = jest.fn()
       wrapper.instance().handleMatchingSuccess = jest.fn()
-      wrapper.instance().onTransition({ action: 'PUSH', pathname: '/' })
+      wrapper.instance().onNavigation({ action: 'PUSH', pathname: '/' })
 
       expect(action).toHaveBeenCalledWith('PUSH')
       expect(mockActionAddon).toHaveBeenCalledWith('/')
@@ -167,7 +167,7 @@ describe('TransitionHooker', () => {
       routerProp.router.matcher.match.mockReturnValueOnce(null)
       wrapper.instance().handleMatchingFailure = jest.fn()
       wrapper.instance().handleMatchingSuccess = jest.fn()
-      wrapper.instance().onTransition({ action: 'PUSH', pathname: '/' })
+      wrapper.instance().onNavigation({ action: 'PUSH', pathname: '/' })
 
       expect(action).toHaveBeenCalledWith('PUSH')
       expect(mockActionAddon).toHaveBeenCalledWith('/')
@@ -187,7 +187,7 @@ describe('TransitionHooker', () => {
       ])
       wrapper.instance().handleMatchingFailure = jest.fn()
       wrapper.instance().handleMatchingSuccess = jest.fn()
-      wrapper.instance().onTransition({ action: 'PUSH', pathname: '/' })
+      wrapper.instance().onNavigation({ action: 'PUSH', pathname: '/' })
 
       expect(action).toHaveBeenCalledWith('PUSH')
       expect(mockActionAddon).toHaveBeenCalledWith('/')
@@ -211,7 +211,7 @@ describe('TransitionHooker', () => {
       ])
       wrapper.instance().handleMatchingFailure = jest.fn()
       wrapper.instance().handleMatchingSuccess = jest.fn()
-      wrapper.instance().onTransition({ action: 'PUSH', pathname: '/' })
+      wrapper.instance().onNavigation({ action: 'PUSH', pathname: '/' })
 
       expect(action).toHaveBeenCalledWith('PUSH')
       expect(mockActionAddon).toHaveBeenCalledWith('/')

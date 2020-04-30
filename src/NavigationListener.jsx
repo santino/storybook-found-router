@@ -4,13 +4,13 @@ import { action } from '@storybook/addon-actions'
 import { linkTo } from '@storybook/addon-links'
 import { routerShape } from 'found/PropTypes'
 
-class TransitionHooker extends React.Component {
+class NavigationListener extends React.Component {
   constructor (props) {
     super(props)
 
-    this.onTransition = this.onTransition.bind(this)
+    this.onNavigation = this.onNavigation.bind(this)
     this.removeNavigationListener = props.router.addNavigationListener(
-      this.onTransition
+      this.onNavigation
     )
   }
 
@@ -34,7 +34,7 @@ class TransitionHooker extends React.Component {
     return linkTo(kind, story)()
   }
 
-  onTransition (location) {
+  onNavigation (location) {
     const link = location.pathname
     const { router: { matcher } } = this.props
 
@@ -66,9 +66,9 @@ class TransitionHooker extends React.Component {
   }
 }
 
-TransitionHooker.propTypes = {
+NavigationListener.propTypes = {
   story: PropTypes.func.isRequired,
   router: routerShape.isRequired
 }
 
-export default TransitionHooker
+export default NavigationListener

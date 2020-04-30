@@ -3,7 +3,7 @@ import createFarceRouter from 'found/createFarceRouter'
 import createRender from 'found/createRender'
 import MemoryProtocol from 'farce/MemoryProtocol'
 import resolver from 'found/resolver'
-import TransitionHooker from './TransitionHooker'
+import NavigationListener from './NavigationListener'
 
 // Due to a breaking change introduced in found 4.0 we need to
 // add empty objects to route children array, if not present.
@@ -33,7 +33,7 @@ const storyRouterDecorator = (routes = [{}], initialLocation = '') => {
       routeConfig: [
         {
           path: rootPath,
-          Component: TransitionHooker,
+          Component: NavigationListener,
           render: ({ Component, props }) => (
             <Component {...props} story={story} />
           ),
