@@ -62,12 +62,11 @@ class NavigationListener extends React.Component {
   }
 
   render () {
-    return this.props.story()
+    return <>{this.props.children}</>
   }
 }
 
 NavigationListener.propTypes = {
-  story: PropTypes.func.isRequired,
   router: routerShape.isRequired
 }
 

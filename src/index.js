@@ -35,7 +35,7 @@ const storyRouterDecorator = (routes = [{}], initialLocation = '') => {
           path: rootPath,
           Component: NavigationListener,
           render: ({ Component, props }) => (
-            <Component {...props} story={story} />
+            <Component {...props}>{story()}</Component>
           ),
           children: routes.map(normaliseRouteChildren)
         }
