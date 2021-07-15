@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { action } from '@storybook/addon-actions'
 import { linkTo } from '@storybook/addon-links'
 import { routerShape } from 'found/PropTypes'
@@ -62,12 +61,11 @@ class NavigationListener extends React.Component {
   }
 
   render () {
-    return this.props.story()
+    return <>{this.props.children}</>
   }
 }
 
 NavigationListener.propTypes = {
-  story: PropTypes.func.isRequired,
   router: routerShape.isRequired
 }
 
