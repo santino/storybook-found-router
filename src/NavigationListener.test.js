@@ -1,5 +1,5 @@
 import React from 'react'
-import { mount, shallow } from 'enzyme'
+import { mount } from 'enzyme'
 import { action } from '@storybook/addon-actions'
 import { linkTo } from '@storybook/addon-links'
 import NavigationListener from './NavigationListener'
@@ -39,18 +39,18 @@ describe('NavigationListener', () => {
     }
   }
   const wrap = () =>
-    mount(<NavigationListener {...routerProp} story={storyFn} />)
+    mount(<NavigationListener {...routerProp}>{storyFn()}</NavigationListener>)
 
   describe('React Component', () => {
     afterEach(() => {
       routerProp.router.addNavigationListener.mockClear()
     })
 
-    it('renders the passed story element as a children', () => {
+    it('renders children component (story) correctly', () => {
       const wrapper = wrap()
 
       expect(wrapper.find('NavigationListener')).toHaveLength(1)
-      expect(wrapper.children().html()).toEqual(shallow(storyFn()).html())
+      expect(wrapper.children().equals(storyFn())).toBe(true)
     })
 
     it('adds the internal onNavigation method as a NavigationListener', () => {
